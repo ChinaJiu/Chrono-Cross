@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>star</title>
+	<style type="text/css">
+		body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+		form,fieldset,input,textarea,p,blockquote,th,td,section,canvas {
+			padding: 0;
+			margin: 0;
+		}
+
+		body{
+			font-size: 40px;
+			background-color: black;
+		}
+		#container {
+			position:absolute;
+			top:50%;
+			left:50%;
+			width:640px;
+			height:1039px;
+			margin: -520px 0 0 -320px;
+			overflow:hidden;
+			/*border: 1px solid red;*/
+			background-color: black;
+		}
+		.stop{position: absolute;left: 20px;top:20px;color: white;}
+		.start{position: absolute;right: 20px;top:20px;color: white; color: red;}
+	</style>
+</head>
+<body>
+	<div id="container"></div>
+	<div class="stop" onclick="stopStar()">stop</div>
+	<div class="start" onclick="startStar()">start</div>
+	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="TweenMax.min.js"></script>
+    <script type="text/javascript" src="setviewport.js"></script>
+	<script type="text/javascript">
+
+	// stop
+  	function stopStar(){
+		startBoor.pause();
+		$('.start').css('color','white');
+		$('.stop').css('color','red');
+  	}
+  	// start
+  	function startStar() {
+		startBoor.play();
+		$('.start').css('color','red');
+		$('.stop').css('color','white');
+  	}
+// TweenMax.to('#container',.2,{rotation:360,repeat:-1,ease:Linear.easeNone})
+
+  	var startBoor = new TimelineMax();
+  	var centerX = $('#container').width() / 2 - 72,
+        	centerY = ($('#container').height() / 2) - 10,	 	
+        	radius = 700, //半径
+        	duration = 1.5; //时间
+	        i = 500, //流星个数
+	        star = null;
+  		startBoor.to('',.001,{repeat:-1,onRepeat:function(){
+  			star = document.createElement("img");
+	            star.src = "star.png";
+	            star.width = 144;
+	            star.height = 19;
+	            star.id = "star" + i;
+	            star.style.cssText = "position:absolute; left:" + centerX + "px; top:" + centerY+"px";
+	            $('#container').append(star);
+	            var angle = Math.random()*Math.PI*2;
+	            TweenMax.set(star, {alpha:0.6,x:0, y:0, scale:0,rotation:(angle/Math.PI)*180, force3d:true});
+	            TweenMax.to(star,duration, {x:(Math.cos(angle) *radius),
+	                y:(Math.sin(angle) * radius),
+	                scale:1.5,
+	                alpha:1,
+	                // delay:Math.random(),
+	                ease:Expo.easeIn,
+	                onCompleteParams:["{self}"],
+	                onComplete:function(e){
+	                		e.target.remove();
+	               }})
+  		}})
+
+    	// createDots();
+	    // function createDots() {
+	    	
+	    //     while (--i > -1) {
+	            
+    	// 	}
+	    // }
+	</script>
+</body>
+
+
+</html>
