@@ -32,9 +32,9 @@
 	<div id="container"></div>
 	<div class="stop" onclick="stopStar()">stop</div>
 	<div class="start" onclick="startStar()">start</div>
-	<script type="text/javascript" src="/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="/TweenMax.min.js"></script>
-    <script type="text/javascript" src="/setviewport.js"></script>
+	<script type="text/javascript" src="./jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="./TweenMax.min.js"></script>
+    <script type="text/javascript" src="./setviewport.js"></script>
 	<script type="text/javascript">
 
 	// stop
@@ -60,7 +60,7 @@
 	        star = null;
   		startBoor.to('',.001,{repeat:-1,onRepeat:function(){
   			star = document.createElement("img");
-	            star.src = "/star.png";
+	            star.src = "./star.png";
 	            star.width = 144;
 	            star.height = 19;
 	            star.id = "star" + i;
